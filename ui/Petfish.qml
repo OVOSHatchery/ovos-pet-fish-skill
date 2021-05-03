@@ -17,6 +17,27 @@ Mycroft.Delegate {
     property int screenYEnd: root.height
     property int screenCenterX: (mainItem.width - lottietest.width) / 2
     property int screenCenterY: (mainItem.height - lottietest.height) / 2
+    property var petAction: sessionData.pet_action
+    
+    onPetActionChanged: {
+        if(petAction == "swim"){
+            swimAround()
+        } else if(petAction == "playdead") {
+            playdead()
+        } else if(petAction == "eatfood") {
+            eatfood()
+        } else if(petAction == "introduce") {
+            introAnim()
+        } else if(petAction == "dance") {
+            dance()
+        } else if(petAction == "sleep") {
+            sleep()
+        } else if(petAction == "awake") {
+            awaken()
+        } else if(petAction == "eatfish") {
+            eatAnotherFish()
+        }
+    }
 
     Timer {
         id: timer
@@ -112,7 +133,9 @@ Mycroft.Delegate {
     }
 
     function eatAnotherFish(){
-        createFishFood()
+        if(!itemInAction){
+            createFishFood()
+        }
     }
 
     function createFishFood(){
